@@ -1,0 +1,14 @@
+{
+  "name": "doc-file-warning",
+  "version": "1.1.0",
+  "enabled": true,
+  "description": "Warn when documentation files are created without explicit user request",
+  "when": {
+    "type": "fileCreated",
+    "patterns": ["*.md", "docs/**", "CHANGELOG*", "LICENSE*"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A documentation file was just created. If this file was not explicitly requested by the user, consider whether it's truly necessary. Documentation should be created only when:\n\n1. Explicitly requested by the user\n2. Required for project setup or usage\n3. Part of a formal specification or requirement\n\nIf you created documentation that wasn't requested, briefly explain why it's necessary or remove it."
+  }
+}

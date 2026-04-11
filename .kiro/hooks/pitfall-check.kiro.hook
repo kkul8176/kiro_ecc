@@ -1,0 +1,13 @@
+{
+  "name": "pitfall-check",
+  "version": "1.0.0",
+  "enabled": true,
+  "description": "매 요청 시작 시 lessons-learned.md의 Common Pitfalls를 확인하여 같은 실수를 반복하지 않도록 리마인드",
+  "when": {
+    "type": "promptSubmit"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "작업을 시작하기 전에 .kiro/steering/lessons-learned.md의 'Common Pitfalls' 섹션을 확인하세요. 이번 작업에 해당하는 주의사항이 있다면 반드시 준수하고, 해당 pitfall을 회피하는 방향으로 작업하세요. 관련 pitfall이 없으면 별도 언급 없이 진행하세요."
+  }
+}
