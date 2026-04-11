@@ -85,3 +85,13 @@ After each batch:
 - Build succeeds
 - No regressions
 - Bundle size reduced
+
+## 산출물 (Artifact)
+
+- **파일**: `docs/refactor-report.md`
+- **필수 섹션**:
+  - 제거된 코드/파일 목록
+  - 통합된 중복 코드 목록
+  - 번들 사이즈 변화 (before/after)
+  - 빌드/테스트 통과 확인
+- **릴레이 시 다음 에이전트에게 전달할 핵심 정보**: 변경된 파일 목록, 번들 사이즈 변화, 회귀 여부

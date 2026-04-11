@@ -1,0 +1,14 @@
+{
+  "name": "iac-security-check",
+  "version": "1.0.0",
+  "enabled": true,
+  "description": "Terraform/IaC 파일 생성 또는 수정 시 보안 및 거버넌스 규칙 준수 여부를 자동 검증합니다.",
+  "when": {
+    "type": "fileEdited",
+    "patterns": ["*.tf", "*.tfvars"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "방금 수정된 Terraform 파일을 cloud-security-baseline.md와 iac-governance.md 기준으로 검증하세요: 1) 모든 자원에 필수 태그(Project, Environment, ManagedBy, Owner)가 적용되어 있는지 2) 보안 그룹이 최소 권한 원칙을 따르는지 (0.0.0.0/0 인바운드 지양) 3) 퍼블릭 접근이 불필요하게 열려있지 않은지 4) 암호화 설정이 적용되어 있는지 5) IAM 정책에 Action:* Resource:* 조합이 없는지 6) 시크릿이 평문으로 하드코딩되어 있지 않은지. 문제가 없으면 별도 언급 없이 진행하세요."
+  }
+}

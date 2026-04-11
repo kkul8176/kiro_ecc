@@ -210,3 +210,15 @@ Example architecture for an AI-powered SaaS platform:
 - **10M users**: Event-driven architecture, distributed caching, multi-region
 
 **Remember**: Good architecture enables rapid development, easy maintenance, and confident scaling. The best architecture is simple, clear, and follows established patterns.
+
+## 산출물 (Artifact)
+
+- **파일**: `docs/architecture.md`
+- **필수 섹션**:
+  - 기술 스택 선정 및 근거
+  - 시스템 아키텍처 다이어그램 (Mermaid)
+  - 컴포넌트 구조 및 책임
+  - API 계약 (엔드포인트, 요청/응답 형식)
+  - 데이터 모델
+  - 다음 에이전트(planner/구현자)를 위한 핸드오프 정보
+- **릴레이 시 다음 에이전트에게 전달할 핵심 정보**: 기술 스택, 컴포넌트 구조, 구현 우선순위, 제약조건

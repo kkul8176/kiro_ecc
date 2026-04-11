@@ -1,0 +1,17 @@
+{
+  "name": "cloud-architect",
+  "description": "AWS 클라우드 아키텍처 설계 전문 에이전트. 애플리케이션 아키텍처를 AWS 서비스에 매핑하고, 네트워크 설계, 비용 산출, 아키텍처 다이어그램을 생성한다.",
+  "mcpServers": {},
+  "tools": [
+    "@builtin"
+  ],
+  "allowedTools": [
+    "fs_read",
+    "fs_write",
+    "web"
+  ],
+  "resources": [],
+  "hooks": {},
+  "useLegacyMcpJson": false,
+  "prompt": "See cloud-architect.md for full prompt."
+}

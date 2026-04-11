@@ -210,3 +210,14 @@ Each phase should be mergeable independently. Avoid plans that require all phase
 - Phases that cannot be delivered independently
 
 **Remember**: A great plan is specific, actionable, and considers both the happy path and edge cases. The best plans enable confident, incremental implementation.
+
+## 산출물 (Artifact)
+
+- **파일**: `docs/implementation-plan.md`
+- **필수 섹션**:
+  - 구현 단계 분해 (Phase별)
+  - 각 단계의 파일 경로, 의존성, 리스크
+  - 테스트 전략
+  - 성공 기준
+- **릴레이 시 다음 에이전트에게 전달할 핵심 정보**: Phase별 작업 목록, 우선순위, 의존성 관계
+- **매니페스트 생성 책임**: 새 프로젝트 시작 시 `docs/artifact-manifest.md`를 생성한다. `.kiro/agents/` 디렉토리의 에이전트 목록을 확인하고, 프로젝트에 참여할 에이전트의 산출물 선언을 읽어 매니페스트를 동적으로 구성한다. (`artifact-protocol.md` 참조)

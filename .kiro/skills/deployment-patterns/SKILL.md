@@ -438,3 +438,37 @@ Before any production deployment:
 - Implementing health checks
 - Preparing for production releases
 - Troubleshooting deployment issues
+
+## 로컬 → 클라우드 배포 전 체크리스트
+
+로컬에서 잘 동작하던 앱을 클라우드에 배포하기 전에 확인해야 할 항목이다. 배포 에러의 대부분은 이 체크리스트로 사전에 잡을 수 있다.
+
+### 앱 코드 점검
+
+| 항목 | 확인 방법 | 흔한 실패 |
+|------|----------|----------|
+| 환경 변수 외부 주입 | `process.env` / `os.environ` 사용 여부 | DB URL, API 키가 코드에 하드코딩 |
+| 헬스체크 엔드포인트 | `GET /health` 존재 여부 | ALB/ECS가 앱 상태를 확인 못해 태스크 재시작 |
+| 포트 유연화 | `PORT` 환경 변수 지원 여부 | 컨테이너 포트 매핑 불일치 |
+| CORS 설정 | 허용 도메인이 환경 변수 기반인지 | `localhost`만 허용되어 배포 후 API 호출 차단 |
+| 파일 시스템 비의존 | 로컬 디스크에 영구 저장하는 코드 없는지 | 컨테이너 재시작 시 파일 소실 |
+| Graceful Shutdown | `SIGTERM` 핸들링 여부 | 배포 중 진행 중인 요청이 끊김 |
+| DB 연결 | SSL/TLS 지원, 연결 풀 설정 | Aurora/RDS는 SSL 필수인 경우 있음 |
+
+### 빌드/패키징 점검
+
+| 항목 | 확인 방법 | 흔한 실패 |
+|------|----------|----------|
+| Dockerfile 빌드 | `docker build .` 성공 여부 | 로컬에서는 되는데 Docker 안에서 빌드 실패 |
+| .dockerignore | `node_modules`, `.git`, `.env` 제외 여부 | 이미지 크기 폭증, 시크릿 포함 |
+| 프로덕션 의존성 | devDependencies가 프로덕션 이미지에 없는지 | 이미지 크기 증가, 보안 표면 확대 |
+| 멀티 스테이지 빌드 | 빌드 스테이지와 런타임 스테이지 분리 | 불필요한 빌드 도구가 프로덕션 이미지에 포함 |
+
+### 인프라 연동 점검
+
+| 항목 | 확인 방법 | 흔한 실패 |
+|------|----------|----------|
+| 보안 그룹 | 앱 포트가 ALB/서비스 간 열려있는지 | 네트워크 차단으로 연결 타임아웃 |
+| IAM 역할 | 앱이 필요한 AWS 서비스 접근 권한 | S3 접근 거부, Secrets Manager 읽기 실패 |
+| DNS/서비스 디스커버리 | 서비스 간 호출이 올바른 엔드포인트인지 | `localhost:5432` → Aurora 엔드포인트로 변경 필요 |
+| 시크릿 주입 | Secrets Manager/Parameter Store 연동 | 환경 변수가 비어있어 앱 시작 실패 |

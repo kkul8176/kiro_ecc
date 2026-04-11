@@ -1,6 +1,6 @@
 {
   "name": "loop-operator",
-  "description": "Operate autonomous agent loops, monitor progress, and intervene safely when loops stall.",
+  "description": "에이전트 릴레이 루프 제어 및 자율 실행 루프 모니터링. 릴레이 파이프라인의 진행 상황을 추적하고, 무한 루프/교착 상태를 감지하여 안전하게 개입한다.",
   "mcpServers": {},
   "tools": [
     "@builtin"

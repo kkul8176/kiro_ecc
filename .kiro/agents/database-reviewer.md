@@ -90,3 +90,13 @@ For detailed index patterns, schema design examples, connection management, conc
 **Remember**: Database issues are often the root cause of application performance problems. Optimize queries and schema design early. Use EXPLAIN ANALYZE to verify assumptions. Always index foreign keys and RLS policy columns.
 
 *Patterns adapted from Supabase Agent Skills (credit: Supabase team) under MIT license.*
+
+## 산출물 (Artifact)
+
+- **파일**: `docs/database-report.md`
+- **필수 섹션**:
+  - 스키마 리뷰 결과 (데이터 타입, 제약조건, 인덱스)
+  - 쿼리 성능 분석 (EXPLAIN ANALYZE 결과)
+  - 보안 점검 (RLS, 권한)
+  - 발견된 이슈 및 수정 권고
+- **릴레이 시 다음 에이전트에게 전달할 핵심 정보**: 성능 이슈 목록, 스키마 변경 필요 여부, 보안 이슈

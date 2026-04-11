@@ -101,6 +101,9 @@ The hooks table and Example 5 in README.md document the action type (`runCommand
 ### `agent-routing.md` 적용 시 서브 에이전트 결과의 후처리 패턴
 `agent-routing.md`에 의해 서브 에이전트(예: architect)가 invoke되면, 서브 에이전트의 출력은 요약된 형태로 반환된다. 메인 에이전트는 이 결과를 사용자에게 그대로 전달하지 말고, 핵심 내용을 정리하고 다음 단계 선택지를 제시하는 "후처리" 역할을 해야 한다. 서브 에이전트의 raw output은 상세하지만 구조화되지 않을 수 있으므로, 메인 에이전트가 표/다이어그램/코드블록으로 재구성하여 가독성을 높이는 것이 효과적이다.
 
+### steering auto inclusion 과다 시 컨텍스트 윈도우 압박
+steering 파일이 `inclusion: auto`로 설정되면 매 대화마다 컨텍스트에 로드된다. 파일이 14개 이상 누적되면 컨텍스트 윈도우를 상당히 소비하여 실제 작업에 쓸 수 있는 공간이 줄어든다. 특정 도메인에만 관련된 steering(예: cloud-cost-awareness, cloud-security-baseline, iac-governance)은 `inclusion: fileMatch` + `fileMatchPattern: "*.tf"` 같은 조건부 포함으로 전환하여, 해당 파일을 다룰 때만 로드되게 하는 것이 효과적이다. 새 steering 추가 시 "이 규칙이 모든 대화에 필요한가?"를 먼저 판단할 것.
+
 ---
 
 ## Notes

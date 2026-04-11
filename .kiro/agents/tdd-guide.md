@@ -91,3 +91,14 @@ Integrate eval-driven development into TDD flow:
 4. Re-run tests and evals; report pass@1 and pass@3.
 
 Release-critical paths should target pass^3 stability before merge.
+
+## 산출물 (Artifact)
+
+- **파일**: `docs/test-report.md`
+- **필수 섹션**:
+  - 테스트 실행 결과 요약 (통과/실패 수)
+  - 커버리지 메트릭 (목표: 80%+)
+  - 판정: PASS / FAIL
+  - FAIL 시 구체적 문제 및 수정 방향
+  - 테스트 실행 명령어
+- **릴레이 시 다음 에이전트에게 전달할 핵심 정보**: PASS/FAIL 판정, 커버리지 수치, FAIL 항목 목록

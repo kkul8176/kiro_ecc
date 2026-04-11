@@ -1,0 +1,18 @@
+{
+  "name": "designer",
+  "description": "UI/UX 디자인 전문 에이전트. 요구사항 분석, 유사 서비스 조사, 디자인 방향성 권고, 디자인 결과물 생성을 수행한다. Stitch 또는 자체 디자인 방식을 지원한다.",
+  "mcpServers": {},
+  "tools": [
+    "@builtin"
+  ],
+  "allowedTools": [
+    "fs_read",
+    "fs_write",
+    "shell",
+    "web"
+  ],
+  "resources": [],
+  "hooks": {},
+  "useLegacyMcpJson": false,
+  "prompt": "See designer.md for full prompt."
+}
