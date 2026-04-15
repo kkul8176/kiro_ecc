@@ -20,15 +20,39 @@ description: 에이전트 산출물 규약 - 릴레이 파이프라인에서 에
 
 모든 산출물 마크다운 파일은 다음 헤더로 시작한다:
 
-```markdown
-# {산출물 제목}
-
-- 작성 에이전트: {에이전트 이름}
-- 작성 일시: {YYYY-MM-DD}
-- 릴레이 단계: {몇 번째 에이전트 invoke인지, 예: 3/5}
-
+```yaml
+---
+title: {산출물 제목}
+agent: {에이전트 이름}
+project: {프로젝트명}
+date: {YYYY-MM-DD}
+type: {architecture | plan | review | security | design | deploy | cloud}
+relay_step: {몇 번째 에이전트 invoke인지, 예: 3/5}
+tags:
+  - kiro/artifact
+  - kiro/{에이전트 이름}
+  - project/{프로젝트명}
+related:
+  - "[[관련 산출물 제목]]"
 ---
 ```
+
+> 이 YAML frontmatter는 Obsidian 프로퍼티와 호환된다. Obsidian에 동기화 시 Graph View, Dataview, Bases에서 산출물을 구조화하여 조회할 수 있다.
+
+### 태그 체계
+
+| 태그 패턴 | 용도 | 예시 |
+|-----------|------|------|
+| `kiro/artifact` | 모든 에이전트 산출물 공통 | 필수 |
+| `kiro/{agent}` | 에이전트별 분류 | `kiro/architect`, `kiro/planner` |
+| `project/{name}` | 프로젝트별 분류 | `project/arm-review-system` |
+| `type/{type}` | 산출물 유형별 분류 | `type/architecture`, `type/review` |
+
+### 위키링크 규칙
+
+- 산출물 간 참조 시 `[[산출물 제목]]` 위키링크를 사용한다.
+- 릴레이 파이프라인에서 이전/다음 산출물을 `related` 프로퍼티에 링크한다.
+- 프로젝트 인덱스 노트(`[[프로젝트명]]`)를 허브로 참조한다.
 
 ## 산출물 파일명 규칙
 

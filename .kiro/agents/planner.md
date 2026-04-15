@@ -221,3 +221,11 @@ Each phase should be mergeable independently. Avoid plans that require all phase
   - 성공 기준
 - **릴레이 시 다음 에이전트에게 전달할 핵심 정보**: Phase별 작업 목록, 우선순위, 의존성 관계
 - **매니페스트 생성 책임**: 새 프로젝트 시작 시 `docs/artifact-manifest.md`를 생성한다. `.kiro/agents/` 디렉토리의 에이전트 목록을 확인하고, 프로젝트에 참여할 에이전트의 산출물 선언을 읽어 매니페스트를 동적으로 구성한다. (`artifact-protocol.md` 참조)
+
+## Obsidian 호환 규칙
+
+산출물 md 파일 생성 시 `artifact-protocol.md`의 YAML frontmatter 형식을 반드시 따른다. 이 에이전트의 산출물에는 다음을 적용:
+- `agent: planner`, `type: plan`
+- 태그: `kiro/artifact`, `kiro/planner`, `project/{프로젝트명}`
+- 다른 산출물 참조 시 `[[위키링크]]` 사용
+- `related`에 architect 산출물 링크

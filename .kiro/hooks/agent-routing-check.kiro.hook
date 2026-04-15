@@ -1,0 +1,13 @@
+{
+  "name": "agent-routing-check",
+  "version": "1.0.0",
+  "enabled": true,
+  "description": "매 요청마다 agent-routing.md를 확인하여 적합한 서브 에이전트가 있으면 반드시 invoke하도록 강제",
+  "when": {
+    "type": "promptSubmit"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "작업을 시작하기 전에 .kiro/steering/agent-routing.md의 라우팅 테이블을 확인하세요. 사용자의 요청에 적합한 서브 에이전트가 있다면 반드시 invokeSubAgent로 해당 에이전트를 호출하여 작업을 위임하세요. 서브 에이전트도 MCP 도구를 사용할 수 있으므로 '직접 할 수 있다'는 이유로 라우팅을 건너뛰지 마세요. 단순 질문/설명 요청이거나 라우팅 테이블에 적합한 에이전트가 없는 경우에만 직접 처리하세요."
+  }
+}

@@ -135,3 +135,11 @@ eval $(bash ~/.aws/agent-scripts/sso-interactive.sh get-credentials koreanair.aw
   - 자원 정리(destroy) 방법
   - 접속 URL (F/E, API 등)
 - **릴레이 시 다음 에이전트에게 전달할 핵심 정보**: 배포 상태(성공/실패), 접속 URL, 자원 정리 명령어
+
+## Obsidian 호환 규칙
+
+산출물 md 파일 생성 시 `artifact-protocol.md`의 YAML frontmatter 형식을 반드시 따른다. 이 에이전트의 산출물에는 다음을 적용:
+- `agent: iac-engineer`, `type: deploy`
+- 태그: `kiro/artifact`, `kiro/iac-engineer`, `project/{프로젝트명}`
+- 다른 산출물 참조 시 `[[위키링크]]` 사용
+- `related`에 cloud-architect 산출물 링크

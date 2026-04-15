@@ -93,3 +93,11 @@ allowedTools:
   - iteration 횟수
   - 구현자 핸드오프 정보 (디자인 방식, design/ 폴더 위치, 인터랙션 설명)
 - **릴레이 시 다음 에이전트에게 전달할 핵심 정보**: 디자인 방식, design/ 폴더 파일 목록, 디자인 시스템 정보, 페이지별 인터랙션 설명
+
+## Obsidian 호환 규칙
+
+산출물 md 파일 생성 시 `artifact-protocol.md`의 YAML frontmatter 형식을 반드시 따른다. 이 에이전트의 산출물에는 다음을 적용:
+- `agent: designer`, `type: design`
+- 태그: `kiro/artifact`, `kiro/designer`, `project/{프로젝트명}`
+- 다른 산출물 참조 시 `[[위키링크]]` 사용
+- `related`에 architect 산출물 링크

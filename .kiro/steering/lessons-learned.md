@@ -104,6 +104,15 @@ The hooks table and Example 5 in README.md document the action type (`runCommand
 ### steering auto inclusion 과다 시 컨텍스트 윈도우 압박
 steering 파일이 `inclusion: auto`로 설정되면 매 대화마다 컨텍스트에 로드된다. 파일이 14개 이상 누적되면 컨텍스트 윈도우를 상당히 소비하여 실제 작업에 쓸 수 있는 공간이 줄어든다. 특정 도메인에만 관련된 steering(예: cloud-cost-awareness, cloud-security-baseline, iac-governance)은 `inclusion: fileMatch` + `fileMatchPattern: "*.tf"` 같은 조건부 포함으로 전환하여, 해당 파일을 다룰 때만 로드되게 하는 것이 효과적이다. 새 steering 추가 시 "이 규칙이 모든 대화에 필요한가?"를 먼저 판단할 것.
 
+### AWS MCP 서버의 멀티 어카운트 인증: Named Profile 필수
+AWS 관련 MCP 서버(Network MCP 등)는 `profile_name` 파라미터로 어카운트를 전환하므로, `~/.aws/config`에 SSO Named Profile이 등록되어 있어야 멀티 어카운트를 지원한다. 현재 `sso-interactive.sh` 환경변수 방식은 단일 어카운트만 가능하고, MCP의 크로스 어카운트 기능(TGW 피어링 양쪽 확인 등)을 사용할 수 없다. 자주 쓰는 어카운트는 `~/.aws/config`에 SSO Named Profile로 등록하되, 기존 `sso-interactive.sh` 방식과 공존 가능하므로 점진적으로 전환할 것.
+
+### "직접 할 수 있다"는 판단이 agent-routing 규칙을 무시하는 주요 원인
+Kiro 메인 에이전트가 MCP 도구나 쉘 명령으로 직접 작업할 수 있는 경우에도, `agent-routing.md`의 라우팅 테이블에 적합한 에이전트가 있으면 반드시 invoke해야 한다. 서브 에이전트도 MCP 도구를 사용할 수 있으므로(예: designer → Stitch MCP, cloud-architect → Network MCP), "서브 에이전트가 MCP를 못 쓴다"는 가정은 틀렸다. credential 컨텍스트(프로필 이름, 리전, 어카운트 ID)는 invoke 시 prompt에 명시적으로 포함하여 전달하면 된다. "바로 할 수 있으니 직접 하자"는 판단은 라우팅 규칙 위반의 가장 흔한 원인이다.
+
+### Obsidian CLI의 `name` vs `path` 파라미터
+`obsidian create`에서 `name`은 슬래시(`/`)를 포함할 수 없다. 하위 폴더에 노트를 생성하려면 반드시 `path` 파라미터를 사용해야 한다 (예: `path="Kiro/Architecture/설계서.md"`). 또한 `.`으로 시작하는 파일명(`.gitkeep.md` 등)은 `TypeError`를 발생시키므로 피할 것.
+
 ---
 
 ## Notes

@@ -222,3 +222,11 @@ Example architecture for an AI-powered SaaS platform:
   - 데이터 모델
   - 다음 에이전트(planner/구현자)를 위한 핸드오프 정보
 - **릴레이 시 다음 에이전트에게 전달할 핵심 정보**: 기술 스택, 컴포넌트 구조, 구현 우선순위, 제약조건
+
+## Obsidian 호환 규칙
+
+산출물 md 파일 생성 시 `artifact-protocol.md`의 YAML frontmatter 형식을 반드시 따른다. 이 에이전트의 산출물에는 다음을 적용:
+- `agent: architect`, `type: architecture`
+- 태그: `kiro/artifact`, `kiro/architect`, `project/{프로젝트명}`
+- 다른 산출물 참조 시 `[[위키링크]]` 사용
+- `related`에 이전/다음 릴레이 산출물 링크

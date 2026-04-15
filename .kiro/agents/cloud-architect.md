@@ -92,3 +92,11 @@ Mermaid로 AWS 아키텍처 다이어그램을 생성한다.
   - 보안 구성 요약 (IAM, 암호화, 네트워크 격리)
   - iac-engineer 핸드오프 정보 (구성할 자원 목록, 의존성 순서, 변수 목록)
 - **릴레이 시 다음 에이전트에게 전달할 핵심 정보**: 구성할 AWS 자원 목록, 의존성 순서, 네트워크 설계, 태그 정책
+
+## Obsidian 호환 규칙
+
+산출물 md 파일 생성 시 `artifact-protocol.md`의 YAML frontmatter 형식을 반드시 따른다. 이 에이전트의 산출물에는 다음을 적용:
+- `agent: cloud-architect`, `type: cloud`
+- 태그: `kiro/artifact`, `kiro/cloud-architect`, `project/{프로젝트명}`
+- 다른 산출물 참조 시 `[[위키링크]]` 사용
+- `related`에 architect 산출물과 iac-engineer 산출물 링크

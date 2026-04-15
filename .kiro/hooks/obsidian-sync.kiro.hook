@@ -1,0 +1,14 @@
+{
+  "name": "obsidian-sync",
+  "version": "1.0.0",
+  "enabled": true,
+  "description": "docs/ 폴더에 산출물 md 파일이 생성되면 Obsidian 볼트에 자동 동기화하고 온톨로지 구조(프로퍼티, 태그, 위키링크)를 적용",
+  "when": {
+    "type": "fileCreated",
+    "patterns": ["**/docs/*.md", "**/docs/**/*.md"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "방금 docs/ 폴더에 산출물 md 파일이 생성되었습니다. 다음을 수행하세요:\n\n1. 생성된 파일을 읽어 내용을 확인합니다.\n2. YAML frontmatter에 title, agent, project, date, type, tags, related 프로퍼티가 있는지 확인합니다. 없으면 파일 내용에서 추론하여 추가합니다.\n3. obsidian CLI로 Obsidian 볼트에 동기화합니다:\n   - type에 따라 적절한 폴더에 생성 (Architecture/, Plans/, Reviews/, Cloud/, Design/)\n   - 명령: obsidian vault=\"Obsidian Vault\" create name=\"Kiro/{폴더}/{노트명}\" content=\"{내용}\" silent overwrite\n4. 해당 프로젝트의 인덱스 노트(Kiro/Projects/{프로젝트명}.md)가 없으면 생성하고, 있으면 새 산출물 링크를 추가합니다.\n\ntype → 폴더 매핑: architecture→Architecture, plan→Plans, review→Reviews, security→Reviews, design→Design, deploy→Cloud, cloud→Cloud"
+  }
+}
