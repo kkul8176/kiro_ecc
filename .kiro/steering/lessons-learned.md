@@ -113,6 +113,39 @@ Kiro 메인 에이전트가 MCP 도구나 쉘 명령으로 직접 작업할 수 
 ### Obsidian CLI의 `name` vs `path` 파라미터
 `obsidian create`에서 `name`은 슬래시(`/`)를 포함할 수 없다. 하위 폴더에 노트를 생성하려면 반드시 `path` 파라미터를 사용해야 한다 (예: `path="Kiro/Architecture/설계서.md"`). 또한 `.`으로 시작하는 파일명(`.gitkeep.md` 등)은 `TypeError`를 발생시키므로 피할 것.
 
+### Obsidian 위키의 가치는 "에이전트 산출물 저장"이 아니라 "외부 소스 Ingest"에 있다
+현재 구성은 에이전트가 만든 산출물을 Obsidian에 동기화하는 것까지 구현되었지만, 카파시의 LLM Wiki 패턴에서 진짜 복리 효과가 나는 건 **외부 소스(회의록, 기사, 보고서 등)를 받아서 기존 지식에 통합하는 Ingest 흐름**이다. 산출물 동기화는 "기록"이고, Ingest는 "지식 축적"이다. Obsidian에 INDEX.md(전체 카탈로그)와 LOG.md(시간순 변경 이력)를 유지하고, 주기적으로 Wiki Lint(고립 페이지, 모순, 오래된 정보 탐지)를 수행하면 위키가 건강하게 성장한다.
+
+### Kiro에서 "에이전트 성장"은 프롬프트 레벨 강화학습으로 구현한다
+Hermes RL Training 같은 모델 가중치 업데이트는 Claude API 환경에서 불가능하다. 대신 Kiro에서는 **프롬프트(steering, lessons-learned, agent 프롬프트)를 경험 기반으로 개선**하는 방식으로 에이전트 성장을 구현한다. 핵심 루프: 실행 → 결과 평가(성공/실패) → 패턴 추출 → lessons-learned 기록 → steering/agent 프롬프트 승격. 현재 `extract-patterns` hook이 패턴 추출을 담당하지만, 성공/실패를 명시적으로 평가하는 메커니즘과 반복 실패 패턴을 자동으로 steering 규칙으로 승격하는 흐름이 보강되면 더 체계적인 성장이 가능하다.
+
+---
+
+## 승격 규칙 (Promotion Rules)
+
+`session-eval` hook이 세션 종료 시 이 섹션을 확인합니다.
+
+### 승격 조건
+- 같은 유형의 실패/pitfall이 **3회 이상** 기록되면 steering 규칙으로 승격을 제안
+- 승격은 **사용자 승인 후** 적용
+
+### 승격 경로
+
+| 실패 유형 | 승격 대상 steering |
+|----------|-------------------|
+| 라우팅 미준수 | `agent-routing.md` |
+| 코딩 실수 반복 | `coding-style.md` |
+| 보안 누락 | `security.md` |
+| Obsidian CLI 오류 | `obsidian-wiki.md` |
+| IaC 실수 | `iac-governance.md` |
+| 클라우드 보안 누락 | `cloud-security-baseline.md` |
+
+### 승격 이력
+
+| 날짜 | 패턴 | 승격 대상 | 상태 |
+|------|------|----------|------|
+| (아직 승격 이력 없음) | | | |
+
 ---
 
 ## Notes

@@ -1,8 +1,8 @@
 {
   "name": "session-summary",
   "version": "1.0.0",
-  "enabled": true,
-  "description": "Generate a brief summary of what was accomplished after agent execution completes",
+  "enabled": false,
+  "description": "DEPRECATED: session-eval hook에 통합됨. Generate a brief summary of what was accomplished after agent execution completes",
   "when": {
     "type": "agentStop"
   },

@@ -1,8 +1,8 @@
 {
   "name": "extract-patterns",
   "version": "1.0.0",
-  "enabled": true,
-  "description": "Suggest patterns to add to lessons-learned.md after agent execution completes",
+  "enabled": false,
+  "description": "DEPRECATED: session-eval hook에 통합됨. Suggest patterns to add to lessons-learned.md after agent execution completes",
   "when": {
     "type": "agentStop"
   },
